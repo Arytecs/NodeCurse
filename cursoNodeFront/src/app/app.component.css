@@ -1,0 +1,25 @@
+.navigation .navbar{
+    background-color: #e53c37 !important;
+    border: none;
+}
+.navigation .navbar *{
+    color: white;
+}
+.navigation .navbar i{
+    margin-right: 8px;
+}
+
+.navigation .navbar a:hover{
+    background-color: #9c1111;
+}
+
+.active{
+    background-color: #9c1111;
+}
+.nav-item{
+    cursor: pointer;
+}
+.navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+}
