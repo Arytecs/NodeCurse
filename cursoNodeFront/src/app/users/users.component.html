@@ -1,0 +1,57 @@
+<div class="row justify-content-md-center">
+  <div class="col-lg-8">
+    <h1 class="h1-strong">{{title}}</h1>
+
+    <div class="people row">
+      <!-- LISTADO-->
+      <div *ngFor="let user of users" class="item-user col-sm-12">
+        <div class="card">
+          <div class="user-img">
+            <div>
+              <a href="#">
+                <img src="{{ url + 'get-image-user/' + user.image }}" width="50px" height="50px" *ngIf="user.image">
+                <img src="../../assets/userAvatar.jpg" width="50px" height="50px" *ngIf="!user.image">
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="user_name card-title">
+              <p class="nameSurname">
+                <a href="#">
+                  {{ user.name + ' ' + user.surname }}
+                </a>
+              </p>
+              <p class="nickname">
+                {{ user.nick }}
+              </p>
+            </div>
+          </div>
+
+          <!-- SEGUIR/DEJAR DE SEGUIR-->
+          <div class="btn-seguimiento">
+            <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0">Seguir</button>
+            <button class="btn btn-primary" *ngIf="follows.indexOf(user._id) >= 0"
+              (mouseenter)="mouseEnter(user._id)"
+              (mouseleave)="mouseLeave(user._id)"
+              [class.btn-danger]="user._id == followUserOver">
+              <span *ngIf="user._id == followUserOver; else following">
+                  Dejar de Seguir
+                </span>
+              <ng-template #following *ngIf="user._id == followUserOver">
+                Siguiendo
+              </ng-template>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!--PAGINACIÓN-->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination float-sm-right">
+        <li class="page-item" *ngIf="page > 1"><a class="page-link"  [routerLink]="['/gente', prevPage]">Anterior</a></li>
+        <li class="page-item" *ngIf="pages != page"><a class="page-link" [routerLink]="['/gente', nextPage]">Siguiente</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,12 +1,12 @@
-import { UserService } from './../services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { User } from './../models/user';
-import { Component, OnInit } from '@angular/core';
+import { UserService } from "./../services/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { User } from "./../models/user";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
   providers: [UserService]
 })
 export class LoginComponent implements OnInit {
@@ -17,29 +17,31 @@ export class LoginComponent implements OnInit {
   public identity;
   public token: string;
 
-  constructor(private _route: ActivatedRoute, private _router: Router, private _userService: UserService) {
-    this.title = 'Login';
-    this.user = new User('', '', '', '', '', '', 'ROLE_USER', '', false);
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _userService: UserService
+  ) {
+    this.title = "Login";
+    this.user = new User("", "", "", "", "", "", "ROLE_USER", null, false);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit() {
     this._userService.login(this.user).subscribe(
       response => {
         this.identity = response.user;
         if (!this.identity && this.identity._id) {
-          this.status = 'error';
+          this.status = "error";
         } else {
-          this.status = 'success';
           // PERSISTIR DATOS DEL USUARIO
-          localStorage.setItem('identity', JSON.stringify(this.identity));
+          localStorage.setItem("identity", JSON.stringify(this.identity));
 
           // Conseguir el token
           this.getToken();
         }
-        this.status = 'success';
+        this.status = "success";
       },
       error => {
         this.status = <any>error;
@@ -47,8 +49,9 @@ export class LoginComponent implements OnInit {
         if (errorMessage != null) {
           this.error = errorMessage.error.message;
         }
-        this.status = 'error';
-      });
+        this.status = "error";
+      }
+    );
   }
 
   getToken() {
@@ -56,16 +59,14 @@ export class LoginComponent implements OnInit {
       response => {
         this.token = response.token;
         if (!this.token) {
-          this.status = 'error';
+          this.status = "error";
         } else {
-          this.status = 'success';
           // PERSISTIR TOKEN DEL USUARIO
-          localStorage.setItem('token', this.token);
-
+          localStorage.setItem("token", this.token);
+          this.getCounters();
           // Conseguir los contadores o estadísticas del usuario
-
         }
-        this.status = 'success';
+        this.status = "success";
       },
       error => {
         this.status = <any>error;
@@ -73,7 +74,21 @@ export class LoginComponent implements OnInit {
         if (errorMessage != null) {
           this.error = errorMessage.error.message;
         }
-        this.status = 'error';
-      });
+        this.status = "error";
+      }
+    );
+  }
+
+  getCounters() {
+    this._userService.getCounters().subscribe(
+      response => {
+        this.status = "success";
+        localStorage.setItem("stats", JSON.stringify(response));
+        this._router.navigate(["/home"]);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

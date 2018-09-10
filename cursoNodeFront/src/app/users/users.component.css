@@ -1,0 +1,43 @@
+.item-user {
+  margin-bottom: 10px;
+}
+.item-user .card {
+  flex-direction: row;
+}
+
+.item-user .card p {
+  margin-bottom: 0px;
+}
+
+.item-user .card p.nickname {
+  color: #969393;
+}
+
+.item-user .card .user_name p.nameSurname a {
+  font-weight: bold;
+  color: #555;
+}
+
+.item-user .card .user-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+.item-user .card .user-img div {
+  border-radius: 100px;
+  overflow: hidden;
+  height: 50px;
+}
+
+.item-user .card .btn-seguimiento {
+  display: flex;
+}
+.item-user .card .btn-seguimiento .btn {
+  margin: 5px;
+}
+
+.item-user .card .card-body {
+  padding: 0px;
+  padding-left: 10px;
+}

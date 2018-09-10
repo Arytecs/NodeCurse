@@ -9,13 +9,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto" *ngIf="identity">
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="oi oi-home"></i>Inicio</a>
+          <a class="nav-link" [routerLink]="['/home']" [routerLinkActive]="['active']"><i class="oi oi-home"></i>Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="oi oi-list"></i>Timeline</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="oi oi-person"></i>Inicio</a>
+          <a class="nav-link" [routerLink]="['/gente']" [routerLinkActive]="['active']"><i class="oi oi-person"></i>Gente</a>
         </li>
       </ul>
 
@@ -25,6 +26,22 @@
           </li>
           <li class="nav-item"  [routerLink]="['/registro']" [routerLinkActive]="['active']">
             <a class="nav-link"><i class="oi oi-pencil"></i>Registro</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar navbar-right" *ngIf="identity">
+          <li class="avatar">
+            <img src="{{ url + 'get-image-user/' + identity.image }}" *ngIf="identity && identity.image">
+          </li>
+          <li>
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{identity.name}}</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Mi perfil</a>
+                <a class="dropdown-item" [routerLink]="['/user-edit']">Mi datos</a>
+                <a class="dropdown-item pointer" (click)="logout()">Cerrar</a>
+              </div>
+            </div>
           </li>
         </ul>
     </div>

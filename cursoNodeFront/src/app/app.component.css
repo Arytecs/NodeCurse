@@ -1,25 +1,61 @@
-.navigation .navbar{
-    background-color: #e53c37 !important;
-    border: none;
+.navigation .navbar {
+  background-color: #e53c37 !important;
+  border: none;
 }
-.navigation .navbar *{
-    color: white;
+.navigation .navbar * {
+  color: white;
 }
-.navigation .navbar i{
-    margin-right: 8px;
-}
-
-.navigation .navbar a:hover{
-    background-color: #9c1111;
+.navigation .navbar i {
+  margin-right: 8px;
 }
 
-.active{
-    background-color: #9c1111;
+.navigation .navbar a:hover {
+  background-color: #9c1111;
 }
-.nav-item{
-    cursor: pointer;
+
+.navigation .navbar .dropdown-menu * {
+  color: black !important;
 }
-.navbar{
-    padding-top: 0;
-    padding-bottom: 0;
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: #9c1111;
+}
+
+.navigation .navbar .dropdown-menu a:hover {
+  background-color: #eee;
+}
+
+.navbar .dropdown-toggle {
+  padding: 8px 1rem;
+}
+
+.navigation .avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-right: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navigation .avatar img {
+  height: auto;
+  width: 38px;
+}
+
+.active {
+  background-color: #9c1111;
+}
+
+.pointer {
+  cursor: pointer;
+}
+.nav-item {
+  cursor: pointer;
+}
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
 }
