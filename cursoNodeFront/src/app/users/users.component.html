@@ -29,7 +29,7 @@
 
           <!-- SEGUIR/DEJAR DE SEGUIR-->
           <div class="btn-seguimiento">
-            <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0">Seguir</button>
+            <button class="btn btn-success" *ngIf="follows.indexOf(user._id) < 0" (click)="followUser(user._id)">Seguir</button>
             <button class="btn btn-primary" *ngIf="follows.indexOf(user._id) >= 0"
               (mouseenter)="mouseEnter(user._id)"
               (mouseleave)="mouseLeave(user._id)"
