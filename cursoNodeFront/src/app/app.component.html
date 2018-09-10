@@ -15,36 +15,36 @@
         <li class="nav-item">
           <a class="nav-link" href="#"><i class="oi oi-list"></i>Timeline</a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="oi oi-person"></i>Inicio</a>
+          <a class="nav-link" [routerLink]="['/gente']" [routerLinkActive]="['active']"><i class="oi oi-person"></i>Gente</a>
         </li>
       </ul>
 
       <ul class="navbar-nav mr-auto navbar-right" *ngIf="!identity">
-        <li class="nav-item" [routerLink]="['/login']" [routerLinkActive]="['active']">
-          <a class="nav-link"><i class="oi oi-account-login"></i>Login</a>
-        </li>
-        <li class="nav-item" [routerLink]="['/registro']" [routerLinkActive]="['active']">
-          <a class="nav-link"><i class="oi oi-pencil"></i>Registro</a>
-        </li>
-      </ul>
+          <li class="nav-item"  [routerLink]="['/login']" [routerLinkActive]="['active']">
+            <a class="nav-link"><i class="oi oi-account-login"></i>Login</a>
+          </li>
+          <li class="nav-item"  [routerLink]="['/registro']" [routerLinkActive]="['active']">
+            <a class="nav-link"><i class="oi oi-pencil"></i>Registro</a>
+          </li>
+        </ul>
 
-      <ul class="nav navbar navbar-right" *ngIf="identity">
-        <li class="avatar"></li>
-        <li>
-          <div class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">
-              {{identity.name}} <span class="caret"></span>
-            </a>
+        <ul class="nav navbar navbar-right" *ngIf="identity">
+          <li class="avatar">
+            <img src="{{ url + 'get-image-user/' + identity.image }}" *ngIf="identity && identity.image">
+          </li>
+          <li>
+            <div class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{identity.name}}</a>
               <div class="dropdown-menu">
-                <a href="#" class="dropdown-item">
-                  <span class="glypicon gliphicon-user"></span>Mi perfil</a>
-                <a href="#" class="dropdown-item">Mis datos</a>
-                <a href="#" class="dropdown-item">Cerrar Sesión</a>
+                <a class="dropdown-item" href="#">Mi perfil</a>
+                <a class="dropdown-item" [routerLink]="['/user-edit']">Mi datos</a>
+                <a class="dropdown-item pointer" (click)="logout()">Cerrar</a>
               </div>
-          </div>
-        </li>
-      </ul>
+            </div>
+          </li>
+        </ul>
     </div>
   </nav>
 </div>
