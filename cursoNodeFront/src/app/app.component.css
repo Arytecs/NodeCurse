@@ -19,6 +19,17 @@
 .nav-item{
     cursor: pointer;
 }
+
+.navigation .navbar .dropdown-menu *{
+    color: black !important;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:focus{
+    background: #9c1111 !important;
+}
+
+.navigation .navbar .dropdown-menu a:hover{
+    background-color: #eee;
+}
 .navbar{
     padding-top: 0;
     padding-bottom: 0;
