@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TimelineComponent } from './timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomeComponent,
     UserEditComponent,
     UsersComponent,
-    SidebarComponent
+    SidebarComponent,
+    TimelineComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [appRoutingProviders],

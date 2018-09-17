@@ -1,3 +1,4 @@
+import { PublicationService } from './../services/publication.service';
 import { Publication } from './../models/publication';
 import { GLOBAL } from './../services/global';
 import { Component, OnInit } from '@angular/core';
@@ -16,7 +17,8 @@ export class SidebarComponent implements OnInit {
   public url;
   public status;
   public publication: Publication;
-  constructor(private _userService: UserService) {
+
+  constructor(private _userService: UserService, private _publicationService: PublicationService) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.stats = this._userService.getStats();
@@ -27,7 +29,25 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
+  onSubmit(form) {
     console.log(this.publication);
+    this._publicationService.addPublication(this.token, this.publication).subscribe(
+      response => {
+        console.log(response);
+        if (response.publication) {
+          this.status = 'success';
+          form.reset();
+        } else {
+          this.status = 'error';
+        }
+      },
+      error => {
+        console.log(error);
+        const errorMessage = <any>error;
+        if (errorMessage !== null) {
+          this.status = 'error';
+        }
+      }
+    );
   }
 }

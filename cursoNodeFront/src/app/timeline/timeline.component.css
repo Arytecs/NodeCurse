@@ -1,0 +1,15 @@
+.card{
+    margin-bottom: 30px;
+    margin-left: 20px;
+}
+ .card .user-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+  }
+ .card .user-img div {
+    border-radius: 100px;
+    overflow: hidden;
+    height: 50px;
+  }

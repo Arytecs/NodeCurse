@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-lg-8">
+    <h1 class="h1-strong">{{title}}</h1>
+
+    <div id="publications">
+      <div *ngFor="let publication of publications" class="item-publication">
+        <div class="card">
+          <div class="user-img">
+            <div>
+              <a href="#">
+                <img src="{{ url + 'get-image-user/' + publication.user.image }}" width="50px" height="50px" *ngIf="publication.user.image">
+                <img src="../../assets/userAvatar.jpg" width="50px" height="50px" *ngIf="!publication.user.image">
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">{{ publication.user.name + ' ' + publication.user.surname }}</h4>
+            <div class="publication-text pull-left">
+              {{ publication.text }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-sidebar class="col-lg-4"></app-sidebar>
+</div>
