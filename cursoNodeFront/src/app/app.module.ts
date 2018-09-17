@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UsersComponent } from './users/users.component';
     RegisterComponent,
     HomeComponent,
     UserEditComponent,
-    UsersComponent
+    UsersComponent,
+    SidebarComponent
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   providers: [appRoutingProviders],

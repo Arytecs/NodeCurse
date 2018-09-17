@@ -27,6 +27,7 @@ export class FollowService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', token);
-    return this._http.post(this.url + 'follow/' + id, { headers: headers });
+    console.log(this.url);
+    return this._http.delete(this.url + 'unfollow/' + id, { headers: headers });
   }
 }

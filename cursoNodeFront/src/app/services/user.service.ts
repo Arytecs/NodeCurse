@@ -108,5 +108,6 @@ export class UserService {
     } else {
       this.stats = null;
     }
+    return this.stats;
   }
 }

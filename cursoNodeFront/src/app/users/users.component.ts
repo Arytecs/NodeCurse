@@ -75,7 +75,6 @@ export class UsersComponent implements OnInit {
         if (!response.users) {
           this.status = 'error';
         } else {
-          console.log(response);
           this.total = response.total;
           this.users = response.users;
           this.pages = response.pages;
@@ -87,7 +86,6 @@ export class UsersComponent implements OnInit {
       },
       error => {
         const errorMessage = <any>error;
-        console.log(errorMessage);
         if (errorMessage != null) {
           this.status = 'error';
         }
@@ -107,7 +105,6 @@ export class UsersComponent implements OnInit {
 
     this._followService.addFollow(this.token, follow).subscribe(
       response => {
-        console.log(response);
         if (!response.follow) {
           this.status = 'error';
         } else {
@@ -117,7 +114,25 @@ export class UsersComponent implements OnInit {
       },
       error => {
         const errorMessage = <any>error;
-        console.log(errorMessage);
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
+  }
+
+  unfollowUser(followed) {
+    // const follow = new Follow('', this.identity._id, followed);
+
+    this._followService.deleteFollow(this.token, followed).subscribe(
+      response => {
+        const search = this.follows.indexOf(followed);
+        if (search !== -1) {
+          this.follows.splice(search, 1);
+        }
+      },
+      error => {
+        const errorMessage = <any>error;
         if (errorMessage != null) {
           this.status = 'error';
         }
