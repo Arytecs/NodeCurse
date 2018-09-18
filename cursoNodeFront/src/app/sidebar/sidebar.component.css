@@ -1,0 +1,72 @@
+.card{
+    padding: 25px;
+    align-items: center;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+#new-publication{
+    align-items: flex-start;
+}
+.card .avatar{
+    width: 175px;
+    height: 175px;
+    border-radius: 100px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.card .avatar img{
+    width: 100%;
+}
+
+.h1-strong{
+    margin-left: 0px;
+}
+
+.card-title{
+    text-align: center;
+}
+.username{
+    font-weight: bold;
+    font-size: 19px;
+    color: #555;
+}
+.nickname{
+    color: #969393;
+}
+
+.label-stats, .number-stats{
+    display: block;
+    text-align: center;
+    transition: all 300ms;
+}
+
+.label-stats{
+    font-weight: bold;
+    color: #555;
+}
+
+.number-stats{
+    font-weight: bold;
+    color: green;
+}
+
+.following-data{
+    float: left;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-top: 20px;
+    border-right: 2px solid #eee;
+}
+.following-data:last-child{
+    border: none;
+}
+.card-text{
+    border-top: 1px solid #eee;
+}
+.card-text a:hover{
+    text-decoration: none;
+}
+.card-text a .number-stats:hover{
+    color: #cc1717;
+}

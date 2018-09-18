@@ -1,14 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute, Params } from "@angular/router";
-import { UserService } from "../services/user.service";
-import { User } from "../models/user";
-import { GLOBAL } from "../services/global";
+import { Follow } from './../models/follow';
+import { FollowService } from './../services/follow.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { User } from '../models/user';
+import { GLOBAL } from '../services/global';
 
 @Component({
-  selector: "app-users",
-  templateUrl: "./users.component.html",
-  styleUrls: ["./users.component.css"],
-  providers: [UserService]
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css'],
+  providers: [UserService, FollowService]
 })
 export class UsersComponent implements OnInit {
   public title: string;
@@ -28,9 +30,10 @@ export class UsersComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService
+    private _userService: UserService,
+    private _followService: FollowService
   ) {
-    this.title = "Probando componente";
+    this.title = 'Probando componente';
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
@@ -42,10 +45,10 @@ export class UsersComponent implements OnInit {
 
   actualPage() {
     this._route.params.subscribe(params => {
-      let page = +params["page"];
+      let page = +params['page'];
       this.page = page;
 
-      if (!params["page"]) {
+      if (!params['page']) {
         page = 1;
         this.page = page;
       }
@@ -70,23 +73,21 @@ export class UsersComponent implements OnInit {
     this._userService.getUsers(page).subscribe(
       response => {
         if (!response.users) {
-          this.status = "error";
+          this.status = 'error';
         } else {
-          console.log(response);
           this.total = response.total;
           this.users = response.users;
           this.pages = response.pages;
           this.follows = response.users_following;
           if (page > response.pages) {
-            this._router.navigate(["/gente", 1]);
+            this._router.navigate(['/gente', 1]);
           }
         }
       },
       error => {
         const errorMessage = <any>error;
-        console.log(errorMessage);
         if (errorMessage != null) {
-          this.status = "error";
+          this.status = 'error';
         }
       }
     );
@@ -97,5 +98,45 @@ export class UsersComponent implements OnInit {
   }
   mouseLeave(user_id) {
     this.followUserOver = 0;
+  }
+
+  followUser(followed) {
+    const follow = new Follow('', this.identity._id, followed);
+
+    this._followService.addFollow(this.token, follow).subscribe(
+      response => {
+        if (!response.follow) {
+          this.status = 'error';
+        } else {
+          this.status = 'success';
+          this.follows.push(followed);
+        }
+      },
+      error => {
+        const errorMessage = <any>error;
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
+  }
+
+  unfollowUser(followed) {
+    // const follow = new Follow('', this.identity._id, followed);
+
+    this._followService.deleteFollow(this.token, followed).subscribe(
+      response => {
+        const search = this.follows.indexOf(followed);
+        if (search !== -1) {
+          this.follows.splice(search, 1);
+        }
+      },
+      error => {
+        const errorMessage = <any>error;
+        if (errorMessage != null) {
+          this.status = 'error';
+        }
+      }
+    );
   }
 }
