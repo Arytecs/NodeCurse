@@ -1,15 +1,59 @@
-.card{
+.item-publication {
     margin-bottom: 30px;
     margin-left: 20px;
-}
- .card .user-img {
+  }
+  .item-publication .card {
+    flex-direction: row;
+    padding: 20px;
+  }
+  
+  .item-publication .card p {
+    margin-bottom: 0px;
+  }
+  
+  .item-publication .card p.nickname {
+    color: #969393;
+  }
+  
+  .item-publication .card .user_name p.nameSurname a {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .item-publication .card .user-img {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 10px;
   }
- .card .user-img div {
+  .item-publication .card .user-img div {
     border-radius: 100px;
     overflow: hidden;
-    height: 50px;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+  .item-publication .card .user-img div img, 
+  .item-publication .card .user-img div a{
+    height: 100%;
+    width: auto;
+  }
+  
+  .item-publication .card .btn-seguimiento {
+    display: flex;
+  }
+  .item-publication .card .btn-seguimiento .btn {
+    margin: 5px;
+  }
+  
+  .item-publication .card .card-body {
+    padding: 0px;
+    margin-left: 30px;
+  }
+  .item-publication .card .card-body .date{
+    color: grey;
+    font-size: 12px;
+  }
+  
