@@ -423,6 +423,10 @@ async function getCountFollow(userId) {
   }
 }
 
+function handleError(error){
+  return error;
+}
+
 module.exports = {
   home,
   pruebas,

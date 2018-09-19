@@ -34,11 +34,15 @@ export class UserService {
     return this._http.post(this.url + 'login', params, { headers: headers });
   }
 
-  getCounters(): Observable<any> {
+  getCounters(id = null): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', this.getToken());
-    return this._http.get(this.url + 'get-counters', { headers: headers });
+    if (id === null) {
+      return this._http.get(this.url + 'get-counters', { headers: headers });
+    } else {
+      return this._http.get(this.url + 'get-counters/' + id, { headers: headers });
+    }
   }
 
   updateUser(user: User): Observable<any> {

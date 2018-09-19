@@ -38,8 +38,8 @@ function getPublications(req, res) {
     }
 
     var itemsPerPage = 4;
-    Follow.find({user: req.user.sub}).populate('followed').exec((err, follows) =>{
-        if(err) return res.status(500).send({ message: 'Error al devolver los follows' });
+    Follow.find({ user: req.user.sub }).populate('followed').exec((err, follows) => {
+        if (err) return res.status(500).send({ message: 'Error al devolver los follows' });
 
         var follows_clean = [];
         follows.forEach((follow) => {
@@ -48,45 +48,75 @@ function getPublications(req, res) {
 
         follows_clean.push(req.user.sub);
 
-        Publication.find({user: {$in: follows_clean}})
+        Publication.find({ user: { $in: follows_clean } })
+            .sort('-created_at')
+            .populate('user')
+            .paginate(page, itemsPerPage, (err, publicationsStored, total) => {
+                if (err) return res.status(500).send({ message: 'Error al obtener las publicaciones' });
+
+                if (!publicationsStored) return res.status(404).send({ message: 'No hay publicaciones' });
+
+                return res.status(200).send({
+                    total: total,
+                    pages: Math.ceil(total / itemsPerPage),
+                    page: page,
+                    publications: publicationsStored,
+                    items_per_page: itemsPerPage
+                });
+            })
+
+    })
+}
+
+function getPublicationsUser(req, res) {
+    var page = 1;
+    if (req.params.page) {
+        page = req.params.page;
+    }
+    var userId = req.user.sub;
+    if(req.params.user){
+        userId = req.params.user;
+    }
+    var itemsPerPage = 4;
+
+    Publication.find({ user: userId })
         .sort('-created_at')
         .populate('user')
         .paginate(page, itemsPerPage, (err, publicationsStored, total) => {
-            if(err) return res.status(500).send({ message: 'Error al obtener las publicaciones' });
+            if (err) return res.status(500).send({ message: 'Error al obtener las publicaciones' });
 
-            if(!publicationsStored) return res.status(404).send({ message: 'No hay publicaciones' });
+            if (!publicationsStored) return res.status(404).send({ message: 'No hay publicaciones' });
 
-            return res.status(200).send({ 
+            return res.status(200).send({
                 total: total,
-                pages: Math.ceil(total/itemsPerPage),
+                pages: Math.ceil(total / itemsPerPage),
                 page: page,
-                publications: publicationsStored ,
+                publications: publicationsStored,
                 items_per_page: itemsPerPage
             });
         })
-        
-    })
+
 }
 
-function getPublication(req, res){
+function getPublication(req, res) {
     var publicationId = req.params.id;
 
     Publication.findById(publicationId, (err, publication) => {
-        if(err) return res.status(500).send({ message: 'Error al obtener la publicación' });
+        if (err) return res.status(500).send({ message: 'Error al obtener la publicación' });
 
-        if(!publication) return res.status(404).send({ message: 'No hay publicación' });
+        if (!publication) return res.status(404).send({ message: 'No hay publicación' });
 
-        return res.status(200).send({publication});
+        return res.status(200).send({ publication });
     })
 }
 
-function deletePublication(req, res){
+function deletePublication(req, res) {
     var publicationId = req.params.id;
 
-    Publication.find({user: req.user.sub, _id: publicationId}).remove((err) => {
-        if(err) return res.status(500).send({ message: 'Error al eliminar la publicación' });
+    Publication.find({ user: req.user.sub, _id: publicationId }).remove((err) => {
+        if (err) return res.status(500).send({ message: 'Error al eliminar la publicación' });
 
-        return res.status(200).send({message: 'Publicación eliminada'});
+        return res.status(200).send({ message: 'Publicación eliminada' });
     })
 }
 
@@ -106,21 +136,21 @@ function uploadImage(req, res) {
 
         if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif') {
 
-            Publication.findOne({user: req.user.sub, _id: publicationId}).exec((err, publication) =>{
+            Publication.findOne({ user: req.user.sub, _id: publicationId }).exec((err, publication) => {
                 if (err) return res.status(500).send({ message: 'Error en la petición' });
 
                 if (!publication) return removeFilesOfUploads(res, file_path, 'No tienes permiso para modificar la publicación');
 
                 Publication.findByIdAndUpdate(publicationId, { file: file_name }, { new: true }, (err, publicationUpdated) => {
                     if (err) return res.status(500).send({ message: 'Error en la petición' });
-    
+
                     if (!publicationUpdated) return res.status(404).send({ message: 'No se ha podido actualizar la publicación' });
-    
+
                     return res.status(200).send({ publication: publicationUpdated });
                 });
             })
 
-            
+
         } else {
             return removeFilesOfUploads(res, file_path, 'Extensión no válida')
         }
@@ -157,5 +187,6 @@ module.exports = {
     getPublication,
     deletePublication,
     uploadImage,
-    getImageFile
+    getImageFile,
+    getPublicationsUser
 }

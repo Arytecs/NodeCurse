@@ -12,6 +12,7 @@ var api = express.Router();
 api.get('/pruebaPublication', PublicationControllers.probando);
 api.post('/publication', md_auth.ensureAuth, PublicationControllers.savePublication);
 api.get('/publications/:page?', md_auth.ensureAuth, PublicationControllers.getPublications);
+api.get('/publications-user/:user/:page?', md_auth.ensureAuth, PublicationControllers.getPublicationsUser);
 api.get('/get-publication/:id', md_auth.ensureAuth, PublicationControllers.getPublication);
 api.delete('/remove-publication/:id', md_auth.ensureAuth, PublicationControllers.deletePublication);
 api.post('/upload-image-pub/:id', [md_auth.ensureAuth, md_upload], PublicationControllers.uploadImage);

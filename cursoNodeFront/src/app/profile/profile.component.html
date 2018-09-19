@@ -2,6 +2,68 @@
   <div class="col-lg-8">
     <h1 class="h1-strong">{{title}}
     </h1>
+
+    <div id="data-profile" class="card" *ngIf="user">
+      <div class="display-flex justify-center align-center">
+        <div class="avatar">
+          <div>
+            <img src="{{ url + 'get-image-user/' + user.image }}" width="50px" height="50px" *ngIf="user.image">
+            <img src="../../assets/userAvatar.jpg" width="50px" height="50px" *ngIf="!user.image">
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <p class="name">{{ user.name + ' ' + user.surname}}</p>
+            <p class="nick">{{ user.nick }}</p>
+            <span class="badge badge-secondary" *ngIf="followed">Te Sigue</span>
+          </div>
+
+          <div class="follow">
+            <button class="btn btn-success" *ngIf="!following" (click)="followUser(user._id)">Seguir</button>
+            <button class="btn btn-primary" *ngIf="following" (click)="unfollowUser(user._id)">Dejar de Seguir</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-text" *ngIf="stats">
+        <div class="following-data">
+          <a href="#">
+            <span class="label-stats">
+              Siguiendo
+            </span>
+            <span class="number-stats">
+              {{stats.following}}
+            </span>
+          </a>
+        </div>
+
+        <div class="following-data">
+          <a href="#">
+            <span class="label-stats">
+              Seguidores
+            </span>
+            <span class="number-stats">
+              {{stats.followed}}
+            </span>
+          </a>
+        </div>
+
+        <div class="following-data">
+          <a href="#">
+            <span class="label-stats">
+              Publicaciones
+            </span>
+            <span class="number-stats">
+              {{stats.publications}}
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!--Publicaciones Usuario-->
+      <app-publications [user]="user._id" class="publications"></app-publications>
+    </div>
+
   </div>
   <app-sidebar (sended)="refresh($event)" class="col-lg-4"></app-sidebar>
 </div>

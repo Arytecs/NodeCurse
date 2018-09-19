@@ -1,0 +1,94 @@
+#data-profile {
+    margin-bottom: 30px;
+    margin-left: 20px;
+  }
+  #data-profile.card {
+    padding: 20px;
+    align-items: center;
+  }  
+
+  #data-profile.card .avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #data-profile.card .avatar div {
+    border-radius: 100px;
+    overflow: hidden;
+    height: 185px;
+    width: 185px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #data-profile.card .avatar div img{
+    height: 100%;
+    width: auto;
+  }
+  
+  
+  #data-profile.card .card-body {
+    padding: 0px;
+    text-align: center;
+    margin-left: 20px;
+  }
+
+  #data-profile .card-body .name {
+      font-size: 29px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 0;
+  }
+  
+  #data-profile .card-body .nick {
+    font-size: 29px;
+    font-weight: normal;
+    color: grey;
+}
+
+/*STATS*/
+.card-text{
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.label-stats, .number-stats{
+  display: block;
+  text-align: center;
+  transition: all 300ms;
+}
+
+.label-stats{
+  font-weight: bold;
+  color: #555;
+}
+
+.number-stats{
+  font-weight: bold;
+  color: green;
+}
+
+.following-data{
+  float: left;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-top: 20px;
+  border-right: 2px solid #eee;
+}
+.following-data:last-child{
+  border: none;
+}
+.card-text{
+  border-top: 1px solid #eee;
+}
+.card-text a:hover{
+  text-decoration: none;
+}
+.card-text a .number-stats:hover{
+  color: #cc1717;
+}
+
+/*Publicaciones*/
+.publications{
+  width: 100%;
+}
+  

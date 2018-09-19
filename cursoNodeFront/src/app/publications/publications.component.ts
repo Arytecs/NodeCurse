@@ -2,7 +2,7 @@ import { Publication } from './../models/publication';
 import { PublicationService } from './../services/publication.service';
 import { GLOBAL } from './../services/global';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class PublicationsComponent implements OnInit {
   public pages;
   public itemsPerPage;
   public noMore: boolean;
+  @Input() user;
 
   constructor(private _userService: UserService,
               private _route: ActivatedRoute,
@@ -34,16 +35,16 @@ export class PublicationsComponent implements OnInit {
     this.url = GLOBAL.url;
     this.title = 'Publications';
     this.page = 1;
-    this.noMore = false;
+    this.noMore = false;    
   }
 
   ngOnInit() {
     console.log('publications component cargado');
-    this.getPublications(this.page);
+    this.getPublications(this.user, this.page);
   }
 
-  getPublications(page, adding = false) {
-    this._publicationService.getPublications(this.token, page).subscribe(
+  getPublications(user, page, adding = false) {
+    this._publicationService.getPublicationsUser(this.token, page, user).subscribe(
       response => {
         console.log(response);
         if (response.publications) {
@@ -61,9 +62,10 @@ export class PublicationsComponent implements OnInit {
 
           }
 
-          // if (page > this.pages) {
-          //   this._router.navigate(['/home']);
-          // }
+          if (this.publications.length === this.total) {
+            this.noMore = true;
+          }
+
         }
       },
       error => {
@@ -82,7 +84,8 @@ export class PublicationsComponent implements OnInit {
       this.page += 1;
     }
 
-    this.getPublications(this.page, true);
+    console.log(this.page);
+    this.getPublications(this.user, this.page, true);
   }
 
 }

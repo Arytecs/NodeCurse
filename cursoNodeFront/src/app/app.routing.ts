@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'gente', component: UsersComponent },
   { path: 'gente/:page', component: UsersComponent },
   { path: 'timeline', component: TimelineComponent },
+  { path: 'perfil/:id', component: ProfileComponent },
   { path: '**', component: HomeComponent }
 ];
 

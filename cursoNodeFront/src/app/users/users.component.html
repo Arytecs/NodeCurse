@@ -17,7 +17,7 @@
           <div class="card-body">
             <div class="user_name card-title">
               <p class="nameSurname">
-                <a href="#">
+                <a [routerLink]="['/perfil', user._id]">
                   {{ user.name + ' ' + user.surname }}
                 </a>
               </p>
