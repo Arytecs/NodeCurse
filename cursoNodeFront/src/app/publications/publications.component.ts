@@ -35,7 +35,7 @@ export class PublicationsComponent implements OnInit {
     this.url = GLOBAL.url;
     this.title = 'Publications';
     this.page = 1;
-    this.noMore = false;    
+    this.noMore = false;
   }
 
   ngOnInit() {
@@ -78,10 +78,9 @@ export class PublicationsComponent implements OnInit {
   }
 
   viewMore() {
-    if (this.publications.length === this.total) {
+    this.page += 1;
+    if (this.page === this.total) {
       this.noMore = true;
-    } else {
-      this.page += 1;
     }
 
     console.log(this.page);

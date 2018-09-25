@@ -38,7 +38,7 @@
             <div class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{identity.name}}</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Mi perfil</a>
+                <a class="dropdown-item" [routerLink]="['/perfil', identity._id]">Mi perfil</a>
                 <a class="dropdown-item" [routerLink]="['/user-edit']">Mi datos</a>
                 <a class="dropdown-item pointer" (click)="logout()">Cerrar</a>
               </div>

@@ -18,6 +18,7 @@ export class SidebarComponent implements OnInit {
   public url;
   public status;
   public publication: Publication;
+  public filesToUpload: Array<File>;
 
   @Output() sended = new EventEmitter();
 
@@ -46,6 +47,11 @@ export class SidebarComponent implements OnInit {
             this.status = 'success';
             form.reset();
             this._router.navigate(['/timeline']);
+
+            this.publication = response.publication;
+            this.publication.file = this.filesToUpload[0];
+            // Subir imagen
+            this.uploadImage();
           } else {
             this.status = 'error';
           }
@@ -63,5 +69,21 @@ export class SidebarComponent implements OnInit {
   sendPublication(event) {
     console.log(event);
     this.sended.emit(JSON.stringify({ send: 'true' }));
+  }
+
+  fileChangeEvent(fileInput: any) {
+    this.filesToUpload = <Array<File>>fileInput.target.files;
+    console.log(this.filesToUpload);
+  }
+
+  uploadImage() {
+    this._publicationService.uploadImage(this.token, this.publication).subscribe(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

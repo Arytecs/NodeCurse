@@ -46,4 +46,15 @@ export class PublicationService {
 
     return this._http.delete(this.url + 'remove-publication/' + id, { headers: headers });
   }
+
+  uploadImage(token, publication): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('image', publication.file, publication.file.name);
+    const headers = new HttpHeaders().set('Authorization', token);
+    return this._http.post(
+      this.url + 'upload-image-pub/' + publication._id,
+      formData,
+      { headers: headers }
+    );
+  }
 }
