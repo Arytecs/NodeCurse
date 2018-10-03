@@ -13,7 +13,7 @@ api.get('/pruebaPublication', PublicationControllers.probando);
 api.post('/publication', md_auth.ensureAuth, PublicationControllers.savePublication);
 api.get('/publications/:page?', md_auth.ensureAuth, PublicationControllers.getPublications);
 api.get('/get-publication/:id', md_auth.ensureAuth, PublicationControllers.getPublication);
-api.get('/remove-publication/:id', md_auth.ensureAuth, PublicationControllers.deletePublication);
+api.delete('/remove-publication/:id', md_auth.ensureAuth, PublicationControllers.deletePublication);
 api.post('/upload-image-pub/:id', [md_auth.ensureAuth, md_upload], PublicationControllers.uploadImage);
 api.get('/get-image-pub/:imageFile',[md_auth.ensureAuth, md_upload], PublicationControllers.getImageFile);
 

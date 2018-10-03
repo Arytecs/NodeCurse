@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-lg-8">
+    <h1 class="h1-strong">{{title}}
+      <button (click)="refresh($event)" class="btn btn-light btn-sm">
+        Mostrar Nuevas
+      </button>
+    </h1>
+
+    <div id="publications">
+      <div *ngFor="let publication of publications" class="item-publication">
+        <div class="card">
+          <div class="user-img">
+            <div>
+              <a href="#">
+                <img src="{{ url + 'get-image-user/' + publication.user.image }}" width="50px" height="50px" *ngIf="publication.user.image">
+                <img src="../../assets/userAvatar.jpg" width="50px" height="50px" *ngIf="!publication.user.image">
+              </a>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-title">
+              <div class="">
+                <span class="user-name">{{ publication.user.name + ' ' + publication.user.surname }}</span>
+                &nbsp;|&nbsp;
+                <span class="date">
+                  {{ (publication.created_at | amFromUnix) | amLocale:'es' | amTimeAgo }}
+                </span>
+              </div>
+              <h4 class="publication-text">
+                {{ publication.text }}
+              </h4>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 text-center">
+      <p>
+        <button class="btn btn-success" (click)="viewMore()" *ngIf="!noMore">
+          Ver más publicaciones
+        </button>
+      </p>
+    </div>
+  </div>
+  <app-sidebar (sended)="refresh($event)" class="col-lg-4"></app-sidebar>
+</div>

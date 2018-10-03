@@ -11,6 +11,9 @@ import { HomeComponent } from './home/home.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UsersComponent } from './users/users.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TimelineComponent } from './timeline/timeline.component';
+import { MomentModule } from 'angular2-moment';
+import { PublicationsComponent } from './publications/publications.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +23,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HomeComponent,
     UserEditComponent,
     UsersComponent,
-    SidebarComponent
+    SidebarComponent,
+    TimelineComponent,
+    PublicationsComponent
   ],
-  imports: [BrowserModule, FormsModule, HttpClientModule, routing],
+  imports: [BrowserModule, FormsModule, HttpClientModule, routing, MomentModule],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
 })
